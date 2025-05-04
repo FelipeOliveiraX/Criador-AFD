@@ -452,3 +452,110 @@ function updateConnections(stateEl) {
         }
     });
 }
+
+// Seleciona o botão de teste e adiciona um ouvinte de evento de clique
+document.getElementById('testBtn').addEventListener('click', testSequence);
+
+/**
+ * Função para testar a sequência inserida pelo usuário no AFD criado
+ */
+/**
+ * Função para testar a sequência inserida pelo usuário no AFD criado,
+ * e destacar o caminho percorrido no autômato.
+ */
+async function testSequence() {
+    const sequence = document.getElementById('inputSequence').value.trim();
+    const resultEl = document.getElementById('testResult');
+  
+    // Verifica se a sequência está vazia
+    if (sequence === '') {
+      resultEl.textContent = 'Por favor, insira uma sequência.';
+      resultEl.style.color = 'red';
+      return;
+    }
+  
+    // Verifica se o estado inicial foi definido
+    if (!initialState) {
+      resultEl.textContent = 'Estado inicial não definido.';
+      resultEl.style.color = 'red';
+      return;
+    }
+  
+    // Limpa destaques anteriores
+    clearHighlights();
+  
+    // Define o estado atual como o estado inicial
+    let currentState = initialState.innerText;
+  
+    // Destaque o estado inicial
+    await highlightState(currentState);
+  
+    // Itera sobre cada símbolo da sequência
+    for (let i = 0; i < sequence.length; i++) {
+      const symbol = sequence[i];
+  
+      // Verifica se símbolo é válido
+      if (symbol !== '0' && symbol !== '1') {
+        resultEl.textContent = `Símbolo inválido: ${symbol}`;
+        resultEl.style.color = 'red';
+        return;
+      }
+  
+      const stateTransitions = transitions[currentState];
+  
+      // Verifica se há transição
+      if (!stateTransitions || !stateTransitions[symbol]) {
+        resultEl.textContent = `Sem transição para '${symbol}' a partir de '${currentState}'.`;
+        resultEl.style.color = 'red';
+        return;
+      }
+  
+      // Avança para o próximo estado
+      currentState = stateTransitions[symbol];
+      await highlightState(currentState);
+    }
+  
+    // Verifica se o estado final é um estado de aceitação
+    const finalStateEl = Array.from(container.children).find(
+      el => el.innerText === currentState && el.classList.contains('final')
+    );
+  
+    if (finalStateEl) {
+      resultEl.textContent = 'Sequência aceita!';
+      resultEl.style.color = 'green';
+    } else {
+      resultEl.textContent = 'Sequência rejeitada.';
+      resultEl.style.color = 'red';
+    }
+  }
+  
+  /**
+   * Destaca visualmente um estado por um tempo breve (animação)
+   */
+  function highlightState(name) {
+    return new Promise(resolve => {
+      const el = Array.from(container.children).find(c => c.innerText === name);
+      if (!el) return resolve();
+  
+      // Salva a cor anterior e aplica destaque
+      const originalColor = el.style.backgroundColor;
+      el.style.backgroundColor = '#4da6ff'; // azul claro
+  
+      // Espera 600ms e remove destaque
+      setTimeout(() => {
+        el.style.backgroundColor = originalColor;
+        resolve();
+      }, 600);
+    });
+  }
+  
+  /**
+   * Limpa qualquer destaque anterior nos estados
+   */
+  function clearHighlights() {
+    Array.from(container.children).forEach(el => {
+      if (el.classList.contains('state')) {
+        el.style.backgroundColor = ''; // remove cor de fundo
+      }
+    });
+  }
