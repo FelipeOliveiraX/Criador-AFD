@@ -1,33 +1,50 @@
+<!-- Declara o tipo do documento como HTML5 -->
 <!DOCTYPE html>
+<!-- Define o idioma do conteúdo da página como português do Brasil -->
 <html lang="pt-BR">
+
 <head>
+  <!-- Define o conjunto de caracteres como UTF-8 (suporta caracteres especiais) -->
   <meta charset="UTF-8" />
+  <!-- Define o título da aba do navegador -->
   <title>Criador de AFD</title>
+  <!-- Vincula um arquivo CSS externo chamado style.css para estilizar a página -->
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+  <!-- Título principal da página -->
   <h1>Criador de AFD</h1>
 
+  <!-- Div que contém os botões de controle para manipular os estados do AFD -->
   <div class="controls">
+    <!-- Botão para adicionar um novo estado -->
     <button id="addStateBtn">Adicionar Estado</button>
+    <!-- Botão para marcar um estado como inicial -->
     <button id="markInitialBtn">Marcar Inicial</button>
+    <!-- Botão para marcar um estado como final -->
     <button id="markFinalBtn">Marcar Final</button>
+    <!-- Botão para remover um estado existente -->
     <button id="removeStateBtn">Remover Estado</button>
+    <!-- Botão para configurar a leitura (transição) entre estados -->
     <button id="configureTransitionBtn">Configurar Leitura</button>
   </div>
 
+  <!-- Div que atuará como o container visual para os estados e transições do AFD -->
   <div id="container"></div>
 
-  <!-- Seção para testar sequências no AFD -->
+  <!-- Seção dedicada para testar cadeias de entrada no AFD criado -->
   <div class="test-section">
-    <!-- Campo de entrada para a sequência -->
+    <!-- Campo de entrada para o usuário digitar uma sequência (ex: 0101) -->
     <input type="text" id="inputSequence" placeholder="Digite a sequência (ex: 0101)" />
-    <!-- Botão para iniciar o teste -->
+    <!-- Botão que executa o teste da sequência no AFD -->
     <button id="testBtn">Testar</button>
-    <!-- Área para exibir o resultado do teste -->
+    <!-- Div que exibirá o resultado do teste (aceita ou rejeita a sequência) -->
     <div id="testResult"></div>
   </div>
 
+  <!-- Importa o arquivo JavaScript externo chamado script.js para adicionar funcionalidades -->
   <script src="script.js"></script>
 </body>
+
 </html>

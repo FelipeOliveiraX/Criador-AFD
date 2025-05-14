@@ -1,159 +1,178 @@
+/* Define o estilo para o corpo da página */
 body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background-color: #f4f4f4;
-  margin: 0;
-  padding: 20px;
+  font-family: Arial, sans-serif; /* Fonte padrão para o texto */
+  text-align: center; /* Centraliza o texto horizontalmente */
+  background-color: #f4f4f4; /* Define a cor de fundo */
+  margin: 0; /* Remove margens externas */
+  padding: 20px; /* Adiciona espaço interno nas bordas */
 }
 
+/* Estilo para o título principal */
 h1 {
-  font-size: 2em;
-  margin-bottom: 20px;
+  font-size: 2em; /* Define o tamanho da fonte do título */
+  margin-bottom: 20px; /* Espaçamento inferior */
 }
 
+/* Estilo para o container dos botões de controle */
 .controls {
-  margin-bottom: 20px;
+  margin-bottom: 20px; /* Espaçamento inferior entre os controles e o conteúdo abaixo */
 }
 
+/* Estilo padrão para todos os botões */
 button {
-  margin: 5px;
-  padding: 10px 20px;
-  font-size: 14px;
-  cursor: pointer;
+  margin: 5px; /* Espaçamento ao redor dos botões */
+  padding: 10px 20px; /* Espaçamento interno (vertical 10px, horizontal 20px) */
+  font-size: 14px; /* Tamanho da fonte */
+  cursor: pointer; /* Cursor de mãozinha ao passar o mouse */
 }
 
+/* Estilo para a área onde os estados e transições do AFD são exibidos */
 #container {
-  width: 90%;
-  max-width: 800px;
-  height: 60vh;
-  margin: 20px auto;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  position: relative;
-  overflow: hidden;
+  width: 90%; /* Largura proporcional à tela */
+  max-width: 800px; /* Largura máxima */
+  height: 60vh; /* Altura relativa à altura da janela (60%) */
+  margin: 20px auto; /* Margem superior e inferior de 20px, centralização horizontal */
+  background-color: #fff; /* Cor de fundo branca */
+  border: 1px solid #ccc; /* Borda cinza clara */
+  position: relative; /* Permite posicionamento absoluto de elementos internos */
+  overflow: hidden; /* Esconde conteúdo que ultrapassar os limites do container */
 }
 
+/* Estilo para os círculos que representam os estados */
 .state {
-  width: 50px;
-  height: 50px;
-  border: 2px solid #555;
-  border-radius: 50%;
-  background-color: #ddd;
-  color: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  cursor: grab;
-  user-select: none;
-  touch-action: none;
-  z-index: 2;
+  width: 50px; /* Largura do estado */
+  height: 50px; /* Altura do estado */
+  border: 2px solid #555; /* Borda do estado */
+  border-radius: 50%; /* Formato circular */
+  background-color: #ddd; /* Cor de fundo cinza claro */
+  color: #000; /* Cor do texto */
+  display: flex; /* Usa flexbox para centralizar conteúdo */
+  align-items: center; /* Centraliza verticalmente */
+  justify-content: center; /* Centraliza horizontalmente */
+  position: absolute; /* Posicionamento absoluto no container */
+  cursor: grab; /* Cursor de mão ao mover */
+  user-select: none; /* Impede seleção de texto */
+  touch-action: none; /* Impede gestos de toque padrão em dispositivos móveis */
+  z-index: 2; /* Fica acima das conexões (linhas) */
 }
 
+/* Impede que elementos filhos dentro do estado recebam eventos do mouse */
 .state > * {
   pointer-events: none;
 }
 
+/* Estilo adicional para estados finais */
 .state.final .inner-circle {
-  position: absolute;
-  width: 30px;
+  position: absolute; /* Posicionamento dentro do estado */
+  width: 30px; /* Diâmetro do círculo interno */
   height: 30px;
-  border: 3px solid #000;
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  border: 3px solid #000; /* Borda preta */
+  border-radius: 50%; /* Formato circular */
+  top: 50%; /* Centraliza verticalmente */
+  left: 50%; /* Centraliza horizontalmente */
+  transform: translate(-50%, -50%); /* Alinha perfeitamente ao centro */
 }
 
+/* Estilo para seta de estado inicial */
 .state.initial .initial-arrow {
-  position: absolute;
-  left: -40px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  width: 40px;
-  height: 12px;
+  position: absolute; /* Posicionamento em relação ao estado */
+  left: -40px; /* Coloca a seta antes do estado */
+  top: 50%; /* Centraliza verticalmente */
+  transform: translateY(-50%); /* Corrige a centralização */
+  pointer-events: none; /* Não interfere com cliques */
+  width: 40px; /* Largura da seta */
+  height: 12px; /* Altura da seta */
 }
 
+/* Estilo para o SVG da seta de estado inicial */
 .initial-arrow svg {
-  display: block;
+  display: block; /* Remove espaços em branco extras */
 }
 
+/* Estilo das linhas de conexão entre estados */
 .connection-line {
-  position: absolute;
-  pointer-events: none;
-  transform-origin: 0 0;
-  height: 2px;
-  background-color: #333;
-  z-index: 1;
+  position: absolute; /* Permite posicionamento livre dentro do container */
+  pointer-events: none; /* Não interfere com interação do mouse */
+  transform-origin: 0 0; /* Define ponto de origem da rotação e escala */
+  height: 2px; /* Espessura da linha */
+  background-color: #333; /* Cor da linha (cinza escuro) */
+  z-index: 1; /* Fica atrás dos estados */
 }
 
+/* Estilo da seta no final da linha de conexão */
 .connection-line::after {
-  content: '';
+  content: ''; /* Elemento vazio usado para criar a seta */
   position: absolute;
-  right: 0;
-  top: -4px;
-  width: 0;
+  right: 0; /* Posiciona no final da linha */
+  top: -4px; /* Alinha verticalmente */
+  width: 0; /* Necessário para criar a seta com bordas */
   height: 0;
-  border-left: 6px solid #333;
-  border-top: 6px solid transparent;
+  border-left: 6px solid #333; /* Parte visível da seta (preenchimento) */
+  border-top: 6px solid transparent; /* Parte transparente para formar o triângulo */
   border-bottom: 6px solid transparent;
 }
 
+/* Estilo da etiqueta de transição (rótulo com o símbolo) */
 .transition-label {
-  position: absolute;
-  background-color: white;
-  padding: 2px 5px;
-  font-size: 12px;
-  border-radius: 3px;
-  border: 1px solid #ccc;
-  pointer-events: none;
-  z-index: 3;
+  position: absolute; /* Posicionamento absoluto dentro do container */
+  background-color: white; /* Fundo branco */
+  padding: 2px 5px; /* Espaçamento interno */
+  font-size: 12px; /* Tamanho da fonte */
+  border-radius: 3px; /* Cantos arredondados */
+  border: 1px solid #ccc; /* Borda cinza clara */
+  pointer-events: none; /* Impede cliques no rótulo */
+  z-index: 3; /* Fica acima de estados e linhas */
 }
 
+/* Container para auto-transições (loops) */
 .loop-container {
-  position: absolute;
-  pointer-events: none;
-  z-index: 1;
-  overflow: visible;
+  position: absolute; /* Posicionamento dentro do estado */
+  pointer-events: none; /* Não interage com o mouse */
+  z-index: 1; /* Atrás dos estados */
+  overflow: visible; /* Permite que elementos extrapolem os limites */
 }
 
+/* Estilo do SVG da auto-transição */
 .self-loop-svg {
-  position: absolute;
+  position: absolute; /* Posicionamento livre */
   top: 0;
   left: 0;
-  overflow: visible;
+  overflow: visible; /* Permite desenho além dos limites */
 }
 
+/* Rótulo para loops */
 .self-loop-label {
-  position: absolute;
-  background-color: white;
-  padding: 2px 5px;
-  font-size: 12px;
-  border-radius: 3px;
-  border: 1px solid #ccc;
-  z-index: 3;
+  position: absolute; /* Posicionamento absoluto */
+  background-color: white; /* Fundo branco */
+  padding: 2px 5px; /* Espaçamento interno */
+  font-size: 12px; /* Tamanho da fonte */
+  border-radius: 3px; /* Bordas arredondadas */
+  border: 1px solid #ccc; /* Borda cinza clara */
+  z-index: 3; /* Acima dos demais elementos */
 }
 
-/* Estilos para a seção de teste */
+/* Estilo da seção de teste de entrada */
 .test-section {
-  margin-top: 20px;
+  margin-top: 20px; /* Espaçamento superior */
 }
 
+/* Estilo para o campo de entrada de sequência */
 .test-section input {
-  padding: 8px;
-  font-size: 14px;
-  width: 200px;
+  padding: 8px; /* Espaçamento interno */
+  font-size: 14px; /* Tamanho da fonte */
+  width: 200px; /* Largura fixa */
 }
 
+/* Estilo para o botão de teste */
 .test-section button {
-  padding: 8px 16px;
-  font-size: 14px;
-  margin-left: 10px;
-  cursor: pointer;
+  padding: 8px 16px; /* Espaçamento interno */
+  font-size: 14px; /* Tamanho da fonte */
+  margin-left: 10px; /* Espaçamento à esquerda do botão */
+  cursor: pointer; /* Cursor de mãozinha */
 }
 
+/* Estilo para o resultado do teste (aceita ou rejeita) */
 #testResult {
-  margin-top: 10px;
-  font-weight: bold;
+  margin-top: 10px; /* Espaçamento superior */
+  font-weight: bold; /* Texto em negrito */
 }

@@ -350,67 +350,89 @@ function configureTransition() {
 }
 
 function drawConnection(fromEl, toEl, symbol) {
-    // Garante que não haja conexões duplicadas com o mesmo símbolo
+    // Remove qualquer conexão existente entre os estados
     removeExistingConnection(fromEl, toEl, symbol);
 
-    // Caso especial: transição para o próprio estado (auto-laço)
+    // Se a conexão for entre o mesmo estado (auto laço)
     if (fromEl === toEl) {
-        drawSelfLoop(fromEl, symbol); // Chama função específica para desenhar o loop
+        drawSelfLoop(fromEl, symbol);
         return;
     }
 
-    // Cria o elemento visual que representa a linha da transição
+    // Criação do elemento visual para a linha da conexão
     const line = document.createElement('div');
     line.className = 'connection-line';
 
-    // Cria o rótulo que mostra o símbolo da transição
+    // Criação do rótulo (símbolo de transição) para a conexão
     const label = document.createElement('div');
     label.className = 'transition-label';
     label.textContent = symbol;
 
-    // Calcula o centro de cada estado
+    // Calcula as coordenadas centrais dos estados de origem e destino
     const fromX = fromEl.offsetLeft + stateSize / 2;
     const fromY = fromEl.offsetTop + stateSize / 2;
     const toX = toEl.offsetLeft + stateSize / 2;
     const toY = toEl.offsetTop + stateSize / 2;
 
-    // Calcula a distância e ângulo entre os centros dos dois estados
+    // Calcula as diferenças de posição entre os estados (delta X e Y)
     const dx = toX - fromX;
     const dy = toY - fromY;
-    const angle = Math.atan2(dy, dx); // Ângulo da linha
-    const distance = Math.sqrt(dx * dx + dy * dy); // Distância entre os centros
 
-    // Ajusta a linha para começar e terminar nas bordas dos círculos dos estados
+    // Calcula o ângulo da linha entre os estados
+    const angle = Math.atan2(dy, dx);
+
+    // Calcula a distância entre os dois estados
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    // Definição do raio do estado (metade do tamanho)
     const radius = stateSize / 2;
+
+    // Calcula as coordenadas de início e fim da linha, levando em conta o raio dos estados
     const startX = fromX + radius * Math.cos(angle);
     const startY = fromY + radius * Math.sin(angle);
     const endX = toX - radius * Math.cos(angle);
     const endY = toY - radius * Math.sin(angle);
 
-    // Recalcula os deslocamentos com base nos pontos ajustados
+    // Ajusta a distância da linha para levar em conta a curvatura
     const adjustedDx = endX - startX;
     const adjustedDy = endY - startY;
     const adjustedDistance = Math.sqrt(adjustedDx * adjustedDx + adjustedDy * adjustedDy);
 
-    // Estiliza e posiciona a linha
+    // Verifica se já existe uma transição oposta (bidirecional) para não desenhar sobre ela
+    const reverseLine = document.querySelector(
+        `.connection-line[data-from="${toEl.innerText}"][data-to="${fromEl.innerText}"]`
+    );
+
+    // Define o deslocamento para transições bidirecionais (se houver)
+    const offsetAmount = 10; // Pixels de deslocamento
+    let offsetX = 0, offsetY = 0;
+
+    if (reverseLine) {
+        // Desloca perpendicularmente à linha original (normal ao vetor)
+        const normalAngle = angle + Math.PI / 2;
+        offsetX = offsetAmount * Math.cos(normalAngle);
+        offsetY = offsetAmount * Math.sin(normalAngle);
+    }
+
+    // Define a posição da linha de conexão, considerando o deslocamento
     line.style.width = `${adjustedDistance}px`;
-    line.style.left = `${startX}px`;
-    line.style.top = `${startY}px`;
+    line.style.left = `${startX + offsetX}px`;
+    line.style.top = `${startY + offsetY}px`;
     line.style.transform = `rotate(${angle}rad)`;
     line.dataset.from = fromEl.innerText;
     line.dataset.to = toEl.innerText;
     line.dataset.symbol = symbol;
 
-    // Posiciona o rótulo no meio da linha
-    const labelX = startX + adjustedDx * 0.5 - 10;
-    const labelY = startY + adjustedDy * 0.5 - 8;
+    // Define a posição do rótulo (símbolo), também com deslocamento
+    const labelX = startX + adjustedDx * 0.5 + offsetX - 10;
+    const labelY = startY + adjustedDy * 0.5 + offsetY - 8;
     label.style.left = `${labelX}px`;
     label.style.top = `${labelY}px`;
     label.dataset.from = fromEl.innerText;
     label.dataset.to = toEl.innerText;
     label.dataset.symbol = symbol;
 
-    // Adiciona os elementos visuais à tela
+    // Adiciona a linha e o rótulo no container visual
     container.appendChild(line);
     container.appendChild(label);
 }
@@ -419,93 +441,88 @@ function drawSelfLoop(stateEl, symbol) {
     // Remove qualquer loop existente com o mesmo símbolo
     removeExistingConnection(stateEl, stateEl, symbol);
 
-    // Cria o container visual para o loop (posicionado acima do estado)
+    // Conta quantos loops já existem neste estado
+    const existingLoops = document.querySelectorAll(
+        `.loop-container[data-from="${stateEl.innerText}"][data-to="${stateEl.innerText}"]`
+    );
+    const isSecondLoop = existingLoops.length >= 1;
+
+    // Cria o container visual para o loop
     const loopContainer = document.createElement('div');
     loopContainer.className = 'loop-container';
+    loopContainer.style.position = 'absolute';
+    loopContainer.style.left = `${stateEl.offsetLeft}px`;
+    loopContainer.style.width = `${stateSize}px`;
+    loopContainer.style.height = `60px`;
+    loopContainer.style.pointerEvents = 'none';
 
-    // Cria um elemento SVG para desenhar o loop
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('class', 'self-loop-svg');
-    svg.setAttribute('width', '100');
-    svg.setAttribute('height', '100');
+    // Posicionamento do loop (acima ou abaixo do estado)
+    if (isSecondLoop) {
+        loopContainer.style.top = `${stateEl.offsetTop + stateSize - 0}px`; // abaixo do estado
+    } else {
+        loopContainer.style.top = `${stateEl.offsetTop - 35}px`; // acima do estado
+    }
 
-    // Define o raio do estado (meio do círculo)
-    const stateRadius = stateSize / 2;
+    // Cria a imagem SVG do loop
+    const loopImage = document.createElement('img');
+    loopImage.src = 'loop.svg'; // Caminho para a imagem do loop
+    loopImage.alt = 'Loop';
+    loopImage.style.width = '40px';
+    loopImage.style.height = '40px';
+    loopImage.style.display = 'block';
+    loopImage.style.margin = '0 auto'; // centraliza
 
-    // Cria um caminho curvado que representa o loop
-    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    path.setAttribute('d', `M ${stateRadius+2},${stateRadius} 
-                           C ${stateRadius+30},${stateRadius} 
-                             ${stateRadius+30},0 
-                             ${stateRadius},5`);
-    path.setAttribute('fill', 'none');
-    path.setAttribute('stroke', '#333');
-    path.setAttribute('stroke-width', '2');
+    // Se for o segundo loop, inverte a imagem verticalmente
+    if (isSecondLoop) {
+        loopImage.style.transform = 'scaleY(-1)';
+    }
 
-    // Cria uma seta no final do caminho usando SVG marker
-    const marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
-    marker.setAttribute('id', `arrowhead-${stateEl.innerText}-${symbol}`);
-    marker.setAttribute('markerWidth', '10');
-    marker.setAttribute('markerHeight', '7');
-    marker.setAttribute('refX', '0');
-    marker.setAttribute('refY', '3.5');
-    marker.setAttribute('orient', 'auto');
-
-    // Define a forma da seta (um triângulo)
-    const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-    polygon.setAttribute('points', '0 0, 10 3.5, 0 7');
-    polygon.setAttribute('fill', '#333');
-    marker.appendChild(polygon);
-
-    // Adiciona o marcador ao SVG
-    const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
-    defs.appendChild(marker);
-    svg.appendChild(defs);
-
-    // Conecta a seta ao final do caminho
-    path.setAttribute('marker-end', `url(#arrowhead-${stateEl.innerText}-${symbol})`);
-    svg.appendChild(path);
-
-    // Cria o rótulo que mostra o símbolo do loop
+    // Cria o rótulo com o símbolo do loop
     const label = document.createElement('div');
     label.className = 'self-loop-label';
     label.textContent = symbol;
     label.style.position = 'absolute';
-    label.style.top = '20px';
-    label.style.right = '20px';
 
-    // Posiciona o container do loop acima do estado
-    loopContainer.style.position = 'absolute';
-    loopContainer.style.left = `${stateEl.offsetLeft}px`;
-    loopContainer.style.top = `${stateEl.offsetTop - 50}px`; // desloca verticalmente para cima
-    loopContainer.style.width = `${stateSize + 50}px`;
-    loopContainer.style.height = `${stateSize + 50}px`;
-    loopContainer.style.pointerEvents = 'none'; // impede cliques no loop
+    // Posiciona o rótulo de acordo com o loop
+    if (isSecondLoop) {
+        label.style.top = '50px'; // abaixo da imagem
+        label.style.left = '50%';
+        label.style.transform = 'translateX(-50%)';
+    } else {
+        label.style.top = '-20px'; // acima da imagem
+        label.style.right = '20px';
+    }
 
-    // Define os atributos de identificação da transição
+    // Define os atributos de identificação
     loopContainer.dataset.from = stateEl.innerText;
     loopContainer.dataset.to = stateEl.innerText;
     loopContainer.dataset.symbol = symbol;
 
-    // Adiciona o SVG e o label ao container
-    loopContainer.appendChild(svg);
+    // Adiciona a imagem e o rótulo ao container
+    loopContainer.appendChild(loopImage);
     loopContainer.appendChild(label);
 
     // Adiciona o loop ao DOM
     container.appendChild(loopContainer);
 
-    // Armazena referência ao loop no elemento do estado (para atualizações futuras)
+    // Armazena referência ao loop no estado
     if (!stateEl.loopContainers) stateEl.loopContainers = [];
     stateEl.loopContainers.push(loopContainer);
 }
 
-// Função atualizada para mover o loop junto com o estado
 function updateLoopPosition(stateEl, loopContainer) {
-    // Atualiza a posição horizontal do loop para acompanhar a posição do estado
+    // Atualiza a posição horizontal do loop
     loopContainer.style.left = `${stateEl.offsetLeft}px`;
 
-    // Atualiza a posição vertical do loop, deslocando-o 50 pixels acima do estado
-    loopContainer.style.top = `${stateEl.offsetTop - 50}px`;
+    // Verifica se é um loop invertido (ou seja, está abaixo do estado)
+    const isInverted = loopContainer.querySelector('img')?.style.transform === 'scaleY(-1)';
+
+    // Atualiza a posição vertical do loop de acordo
+    if (isInverted) {
+        loopContainer.style.top = `${stateEl.offsetTop + stateSize - 0}px`; // abaixo do estado
+    } else {
+        loopContainer.style.top = `${stateEl.offsetTop - 35}px`; // acima do estado
+    }
 }
 
 function removeExistingConnection(fromEl, toEl, symbol) {
@@ -600,15 +617,16 @@ function updateConnections(stateEl) {
 document.getElementById('testBtn').addEventListener('click', testSequence);
 
 /**
- * Função para testar a sequência inserida pelo usuário no AFD criado
- */
-/**
  * Função para testar a sequência inserida pelo usuário no AFD criado,
  * e destacar o caminho percorrido no autômato.
  */
 async function testSequence() {
-    const sequence = document.getElementById('inputSequence').value.trim();
     const resultEl = document.getElementById('testResult');
+    
+    // Limpa a mensagem de resultado anterior
+    resultEl.textContent = '';
+
+    const sequence = document.getElementById('inputSequence').value.trim();
   
     // Verifica se a sequência está vazia
     if (sequence === '') {
