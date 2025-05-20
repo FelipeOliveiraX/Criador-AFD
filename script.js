@@ -465,7 +465,7 @@ function drawSelfLoop(stateEl, symbol) {
 
     // Cria a imagem SVG do loop
     const loopImage = document.createElement('img');
-    loopImage.src = 'loop.svg'; // Caminho para a imagem do loop
+    loopImage.src = 'imgs/loop.svg'; // Caminho para a imagem do loop
     loopImage.alt = 'Loop';
     loopImage.style.width = '40px';
     loopImage.style.height = '40px';
@@ -614,7 +614,10 @@ function updateConnections(stateEl) {
 }
 
 // Seleciona o botão de teste e adiciona um ouvinte de evento de clique
-document.getElementById('testBtn').addEventListener('click', testSequence);
+document.getElementById("testBtn").addEventListener("click", function (e) {
+  e.preventDefault();
+  testSequence();
+  });
 
 /**
  * Função para testar a sequência inserida pelo usuário no AFD criado,

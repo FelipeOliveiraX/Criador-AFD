@@ -6,28 +6,61 @@
 <head>
   <!-- Define o conjunto de caracteres como UTF-8 (suporta caracteres especiais) -->
   <meta charset="UTF-8" />
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Define o título da aba do navegador -->
-  <title>Criador de AFD</title>
+  <title>AutomaTest</title>
   <!-- Vincula um arquivo CSS externo chamado style.css para estilizar a página -->
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
   <!-- Título principal da página -->
-  <h1>Criador de AFD</h1>
+  <h1><span class="gradient-text">AutomaTest</span></h1>
+
 
   <!-- Div que contém os botões de controle para manipular os estados do AFD -->
   <div class="controls">
-    <!-- Botão para adicionar um novo estado -->
-    <button id="addStateBtn">Adicionar Estado</button>
-    <!-- Botão para marcar um estado como inicial -->
-    <button id="markInitialBtn">Marcar Inicial</button>
-    <!-- Botão para marcar um estado como final -->
-    <button id="markFinalBtn">Marcar Final</button>
-    <!-- Botão para remover um estado existente -->
-    <button id="removeStateBtn">Remover Estado</button>
-    <!-- Botão para configurar a leitura (transição) entre estados -->
-    <button id="configureTransitionBtn">Configurar Leitura</button>
+  <button id="addStateBtn" class="btn btn-1">
+    <span class="btn-icon">&#xf067;</span> <!-- ícone FontAwesome -->
+    <div class="btn-text">
+      <span>Adicionar</span>
+      <span>Estado</span>
+    </div>
+  </button>
+
+  <button id="markInitialBtn" class="btn btn-2">
+    <span class="btn-icon">&#xf090;</span>
+    <div class="btn-text">
+      <span>Definir</span>
+      <span>Inicial</span>
+    </div>
+  </button>
+
+  <button id="markFinalBtn" class="btn btn-3">
+    <span class="btn-icon">&#xf192;</span>
+    <div class="btn-text">
+      <span>Definir</span>
+      <span>Final</span>
+    </div>
+  </button>
+
+  <button id="configureTransitionBtn" class="btn btn-4">
+    <span class="btn-icon">&#xf074;</span>
+    <div class="btn-text">
+      <span>Configurar</span>
+      <span>Leitura</span>
+    </div>
+  </button>
+
+  <button id="removeStateBtn" class="btn btn-5">
+    <span class="btn-icon">&#xf00d;</span>
+    <div class="btn-text">
+      <span>Remover</span>
+      <span>Estado</span>
+    </div>
+  </button>
   </div>
 
   <!-- Div que atuará como o container visual para os estados e transições do AFD -->
@@ -35,12 +68,19 @@
 
   <!-- Seção dedicada para testar cadeias de entrada no AFD criado -->
   <div class="test-section">
-    <!-- Campo de entrada para o usuário digitar uma sequência (ex: 0101) -->
-    <input type="text" id="inputSequence" placeholder="Digite a sequência (ex: 0101)" />
-    <!-- Botão que executa o teste da sequência no AFD -->
-    <button id="testBtn">Testar</button>
-    <!-- Div que exibirá o resultado do teste (aceita ou rejeita a sequência) -->
-    <div id="testResult"></div>
+    <div class="input-and-result">
+      <input type="text" id="inputSequence" placeholder="Digite a sequência (ex: 0101)" />
+      <div id="testResult"></div>
+    </div>
+
+    <div ontouchstart="">
+      <div class="test-button">
+        <a href="#" id="testBtn">
+          Testar
+          <img src="pngs/test.png" alt="foguete" class="icon-rocket" />
+        </a>
+      </div>
+    </div>
   </div>
 
   <!-- Importa o arquivo JavaScript externo chamado script.js para adicionar funcionalidades -->
