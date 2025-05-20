@@ -21,6 +21,19 @@ const btnInitial = document.getElementById('markInitialBtn');
 const btnFinal = document.getElementById('markFinalBtn');
 const btnConfigureTransition = document.getElementById('configureTransitionBtn');
 
+const helpLink = document.getElementById('helpLink');
+const instructionOverlay = document.getElementById('instructionOverlay');
+const closeBtn = document.getElementById('closeInstructionBtn');
+
+helpLink.addEventListener('click', e => {
+  e.preventDefault();
+  instructionOverlay.style.display = 'block';
+});
+
+closeBtn.addEventListener('click', () => {
+  instructionOverlay.style.display = 'none';
+});
+
 // Associa funções aos cliques dos botões
 btnAdd.onclick = addState;
 btnRemove.onclick = removeState;

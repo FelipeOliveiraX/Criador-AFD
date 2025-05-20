@@ -19,7 +19,25 @@
   <!-- Título principal da página -->
   <h1><span class="gradient-text">AutomaTest</span></h1>
 
+  <h3 class="subtitle">
+    Crie e teste seu próprio Autômato Finito Determinístico (AFD)!<br />
+    Caso precise de ajuda, <a href="#" id="helpLink">clique aqui</a>.
+  </h3>
 
+  <!-- Caixa de mensagem de instrução, inicialmente escondida -->
+  <div id="instructionOverlay" class="instruction-overlay" style="display:none;">
+    <div class="instruction-box">
+      <strong>INSTRUÇÕES!</strong><br>
+      Passos para criar e testar seu AFD:<br>
+      1º - Adicione 2 ou mais estados;<br>
+      2º - Defina qual deles será o estado inicial (apenas um) e qual(is) será(ão) o(s) estado(s) final(is);<br>
+      3º - Configure as transições no botão “Configurar Leitura”, definindo qual a leitura (0 ou 1) e para qual estado leva (ex.: q1);<br>
+      4º - Digite a sequência que deseja testar no campo embaixo e então clique em “Testar”.<br><br>
+      Obs.: Poderão aparecer mensagens de instrução caso esses critérios não sejam atendidos, leia com atenção.<br>
+      No máximo 10 estados podem ser criados (q0 a q9) para evitar sobrecarga do sistema.<br><br>
+      <button id="closeInstructionBtn">Fechar</button>
+    </div>
+  </div>
   <!-- Div que contém os botões de controle para manipular os estados do AFD -->
   <div class="controls">
   <button id="addStateBtn" class="btn btn-1">

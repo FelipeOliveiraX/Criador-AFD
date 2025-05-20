@@ -56,6 +56,82 @@ h1 {
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
 }
 
+.subtitle {
+  color: #2980b9;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1em;         /* tamanho igual ao h1 */
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 1px;
+  margin: 10px auto 20px;
+  margin-bottom: 15px;  
+  padding: 12px 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  border-radius: 8px;
+  max-width: 750px;
+  display: block;
+  clear: both;
+}
+
+.subtitle a {
+  color: #2980b9;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* estilo da caixa de mensagem de instrução */
+.instruction-message {
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+  max-width: 800px;
+  white-space: pre-line;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.instruction-overlay {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  max-width: 500px;
+  padding: 25px 30px;
+  z-index: 9999;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1em;
+  color: #333;
+  user-select: text;
+}
+
+.instruction-box {
+  text-align: justify;
+  position: relative;
+}
+
+.instruction-box button {
+  display: block;       /* transforma o botão em bloco */
+  margin: 15px auto 0;  /* margem superior e auto nas laterais para centralizar */
+  background-color: #2980b9;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;  
+}
+
+.instruction-box button:hover {
+  background-color: #1c5980;
+}
+
 .controls {
   margin-bottom: 20px;
   text-align: center;
