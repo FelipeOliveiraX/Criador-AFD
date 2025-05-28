@@ -1,22 +1,22 @@
-<!-- Declara o tipo do documento como HTML5 -->
 <!DOCTYPE html>
-<!-- Define o idioma do conteúdo da página como português do Brasil -->
 <html lang="pt-BR">
 
-<head>
-  <!-- Define o conjunto de caracteres como UTF-8 (suporta caracteres especiais) -->
+<head>  
   <meta charset="UTF-8" />
+
+  <!-- Importações -->
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- Define o título da aba do navegador -->
+  
   <title>AutomaTest</title>
-  <!-- Vincula um arquivo CSS externo chamado style.css para estilizar a página -->
+  
+  <!-- Link dos arquivos CSS e JavaScript -->
   <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
 </head>
 
-<body>
-  <!-- Título principal da página -->
+<body>  
   <h1><span class="gradient-text">AutomaTest</span></h1>
 
   <h3 class="subtitle">
@@ -24,7 +24,7 @@
     Caso precise de ajuda, <a href="#" id="helpLink">clique aqui</a>.
   </h3>
 
-  <!-- Caixa de mensagem de instrução, inicialmente escondida -->
+  <!-- Caixa de mensagem de instrução-->
   <div id="instructionOverlay" class="instruction-overlay" style="display:none;">
     <div class="instruction-box">
       <strong>INSTRUÇÕES!</strong><br>
@@ -38,53 +38,62 @@
       <button id="closeInstructionBtn">Fechar</button>
     </div>
   </div>
-  <!-- Div que contém os botões de controle para manipular os estados do AFD -->
+
+  <!-- Os botões de controle para manipular os estados do AFD -->
   <div class="controls">
-  <button id="addStateBtn" class="btn btn-1">
-    <span class="btn-icon">&#xf067;</span> <!-- ícone FontAwesome -->
-    <div class="btn-text">
-      <span>Adicionar</span>
-      <span>Estado</span>
-    </div>
-  </button>
+    <button id="addStateBtn" class="btn btn-1">
+      <span class="btn-icon">&#xf067;</span> <!-- ícone FontAwesome -->
+      <div class="btn-text">
+        <span>Adicionar</span>
+        <span>Estado</span>
+      </div>
+    </button>
 
-  <button id="markInitialBtn" class="btn btn-2">
-    <span class="btn-icon">&#xf090;</span>
-    <div class="btn-text">
-      <span>Definir</span>
-      <span>Inicial</span>
-    </div>
-  </button>
+    <button id="markInitialBtn" class="btn btn-2">
+      <span class="btn-icon">&#xf090;</span>
+      <div class="btn-text">
+        <span>Definir</span>
+        <span>Inicial</span>
+      </div>
+    </button>
 
-  <button id="markFinalBtn" class="btn btn-3">
-    <span class="btn-icon">&#xf192;</span>
-    <div class="btn-text">
-      <span>Definir</span>
-      <span>Final</span>
-    </div>
-  </button>
+    <button id="markFinalBtn" class="btn btn-3">
+      <span class="btn-icon">&#xf192;</span>
+      <div class="btn-text">
+        <span>Definir</span>
+        <span>Final</span>
+      </div>
+    </button>
 
-  <button id="configureTransitionBtn" class="btn btn-4">
-    <span class="btn-icon">&#xf074;</span>
-    <div class="btn-text">
-      <span>Configurar</span>
-      <span>Leitura</span>
-    </div>
-  </button>
+    <button id="configureTransitionBtn" class="btn btn-4">
+      <span class="btn-icon">&#xf074;</span>
+      <div class="btn-text">
+        <span>Configurar</span>
+        <span>Leitura</span>
+      </div>
+    </button>
 
-  <button id="removeStateBtn" class="btn btn-5">
-    <span class="btn-icon">&#xf00d;</span>
-    <div class="btn-text">
-      <span>Remover</span>
-      <span>Estado</span>
-    </div>
-  </button>
+    <button id="removeStateBtn" class="btn btn-5">
+      <span class="btn-icon">&#xf00d;</span>
+      <div class="btn-text">
+        <span>Remover</span>
+        <span>Estado</span>
+      </div>
+    </button>
   </div>
 
-  <!-- Div que atuará como o container visual para os estados e transições do AFD -->
-  <div id="container"></div>
+  <!-- Container para os estados e transições do AFD -->
+  <div id="container">
+    <div class="clear-button"> <!-- Botão de reiniciar a página -->
+      <a href="#" id="clearBtn">
+        Reiniciar
+        <i class="fa fa-refresh"></i>
+      </a>
+    </div>
+  </div>
 
-  <!-- Seção dedicada para testar cadeias de entrada no AFD criado -->
+
+  <!-- Seção para o teste do AFD criado -->
   <div class="test-section">
     <div class="input-and-result">
       <input type="text" id="inputSequence" placeholder="Digite a sequência (ex: 0101)" />
@@ -101,8 +110,13 @@
     </div>
   </div>
 
-  <!-- Importa o arquivo JavaScript externo chamado script.js para adicionar funcionalidades -->
-  <script src="script.js"></script>
+  <!-- Link para o repositório -->
+  <div class="footer">
+    <a href="https://github.com/FelipeOliveiraX/Criador-AFD" target="_blank">
+      <i class="fa fa-github"></i> Ver no GitHub
+    </a>  
+  </div>
+  
 </body>
 
 </html>

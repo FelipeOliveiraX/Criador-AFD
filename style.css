@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
 
+/* Fundo da página */
 body {
   font-family: Arial, sans-serif;
   text-align: center;  
@@ -7,22 +8,24 @@ body {
   padding: 5px;
   background: linear-gradient(
   -45deg,
-  #2980b9,  /* azul forte */
-  #27ae60,  /* verde azulado */
-  #34495e,  /* azul acinzentado */
-  #6c5ce7   /* roxo azulado */
+  #2980b9,  
+  #27ae60,  
+  #34495e,  
+  #6c5ce7   
   );
   background-size: 400% 400%;
   animation: gradientFlow 15s ease infinite;
   color: white;
 }
 
+/* Gradiente do fundo da página */
 @keyframes gradientFlow {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
+/* Título */
 h1 {
   font-family: 'Poppins', sans-serif;
   font-size: 3em;
@@ -36,18 +39,18 @@ h1 {
   border-radius: 8px;
 }
 
-/* gradiente aplicado só ao texto */
+/* Gradiente do título */
 .gradient-text {
   background: linear-gradient(
-    90deg,
+    -45deg,
     #2980b9,
     #27ae60,
-    #2c3e50,
-    #957612,
-    #c0392b
+    #34495e,
+    #6c5ce7
   );
-  background-size: 200%;
-  background-repeat: repeat;
+  background-size: 400% 400%;
+  animation: gradientFlow 15s ease infinite;
+  
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -56,10 +59,11 @@ h1 {
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
 }
 
+/* Subtítulo */
 .subtitle {
   color: #2980b9;
   font-family: 'Poppins', sans-serif;
-  font-size: 1em;         /* tamanho igual ao h1 */
+  font-size: 1em;         
   font-weight: 700;
   text-align: center;
   letter-spacing: 1px;
@@ -74,13 +78,14 @@ h1 {
   clear: both;
 }
 
+/* Clicável para as instrições, dentro do subtítulo */
 .subtitle a {
   color: #2980b9;
   text-decoration: underline;
   cursor: pointer;
 }
 
-/* estilo da caixa de mensagem de instrução */
+/* Estilo da caixa de mensagem de instrução */
 .instruction-message {
   font-family: 'Poppins', sans-serif;
   background-color: #fff;
@@ -94,6 +99,7 @@ h1 {
   color: #333;
 }
 
+/* Estilo do overlay que cobre a tela para a instrução */
 .instruction-overlay {
   position: fixed;
   top: 20%;
@@ -111,14 +117,16 @@ h1 {
   user-select: text;
 }
 
+/* Caixa interna da mensagem de instrução */
 .instruction-box {
   text-align: justify;
   position: relative;
 }
 
+/* Estilo do botão de fechar a caixa de instrução */
 .instruction-box button {
-  display: block;       /* transforma o botão em bloco */
-  margin: 15px auto 0;  /* margem superior e auto nas laterais para centralizar */
+  display: block;       
+  margin: 15px auto 0;  
   background-color: #2980b9;
   color: #fff;
   border: none;
@@ -128,10 +136,12 @@ h1 {
   font-weight: 600;  
 }
 
+/* Efeito hover para o botão de fechar */
 .instruction-box button:hover {
   background-color: #1c5980;
 }
 
+/* Padroniza a div dos botões superiores */
 .controls {
   margin-bottom: 20px;
   text-align: center;
@@ -141,231 +151,7 @@ h1 {
   gap: 10px;
 }
 
-button {
-  margin: 5px;
-  padding: 10px 20px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.test-button {
-  position: relative;
-  display: inline-block;
-  margin: 20px;
-}
-
-.test-button a {
-  color: white;
-  font-family: Helvetica, sans-serif;
-  font-weight: bold;
-  font-size: 36px;
-  text-align: center;
-  text-decoration: none;
-  background-color: #f03030;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  padding: 20px 40px;
-  position: relative;
-  text-shadow: 0px 1px 0px #000;
-  -webkit-box-shadow: inset 0 1px 0 #ffd4d4, 0 10px 0 #a52727;
-  -moz-box-shadow: inset 0 1px 0 #ffd4d4, 0 10px 0 #a52727;
-  box-shadow: inset 0 1px 0 #ffd4d4, 0 10px 0 #a52727;
-  border-radius: 5px;
-}
-
-.test-button a:active {
-  top: 10px;
-  background-color: #c0392b;
-  box-shadow: inset 0 1px 0 #ffd4d4, inset 0 -3px 0 #a52727;
-}
-
-.test-button:after {
-  content: "";
-  height: 100%;
-  width: 100%;
-  padding: 4px;
-  position: absolute;
-  bottom: -15px;
-  left: -4px;
-  z-index: -1;
-  background-color: #2B1800;
-  border-radius: 5px;
-}
-
-.icon-rocket {
-  height: 32px;
-  width: 32px;
-}
-
-#container {
-  width: 90%;
-  max-width: 800px;
-  height: 40vh;
-  margin: 15px auto;  
-  background-color: #fff;
-  border: 1px solid #ccc;
-  position: relative;
-  overflow: hidden;
-  border-radius: 8px;
-  box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.state {
-  width: 50px;
-  height: 50px;
-  border: 2px solid #555;
-  border-radius: 50%;
-  background-color: #ddd;
-  color: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  cursor: grab;
-  user-select: none;
-  touch-action: none;
-  z-index: 2;
-}
-
-.state > * {
-  pointer-events: none;
-}
-
-.state.final .inner-circle {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  border: 3px solid #000;
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.state.initial .initial-arrow {
-  position: absolute;
-  left: -40px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  width: 40px;
-  height: 12px;
-}
-
-.initial-arrow svg {
-  display: block;
-}
-
-.connection-line {
-  position: absolute;
-  pointer-events: none;
-  transform-origin: 0 0;
-  height: 2px;
-  background-color: #333;
-  z-index: 1;
-}
-
-.connection-line::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: -4px;
-  width: 0;
-  height: 0;
-  border-left: 6px solid #333;
-  border-top: 6px solid transparent;
-  border-bottom: 6px solid transparent;
-}
-
-.transition-label,
-.self-loop-label {
-  color: black;
-  position: absolute;
-  background-color: white;
-  padding: 2px 5px;
-  font-size: 12px;
-  border-radius: 3px;
-  border: 1px solid #ccc;
-  z-index: 3;
-}
-
-.loop-container {
-  position: absolute;
-  pointer-events: none;
-  z-index: 1;
-  overflow: visible;
-}
-
-.self-loop-svg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: visible;
-}
-
-.test-section {
-  display: flex;
-  flex-direction: column; 
-  align-items: center;    
-}
-
-.test-section input {
-  font-family: 'Lato', sans-serif;
-  padding: 8px;
-  font-size: 14px;
-  width: 200px;
-  border: 1px solid #ccc; /* igual ao container */
-  border-radius: 8px;
-  box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.1); /* mesma opacidade */
-  outline: none; /* remove contorno ao focar */
-  background-color: #fff;
-}
-
-.test-section button {
-  padding: 8px 16px;
-  font-size: 14px;
-  margin-left: 10px;
-  cursor: pointer;  
-}
-
-.input-and-result {
-  position: relative; /* Para o testResult se posicionar em relação a esse container */
-  display: flex;
-  justify-content: center; /* Centraliza o input horizontalmente */
-  margin-top: 20px;
-}
-
-#inputSequence {
-  width: 250px;
-  padding: 8px 12px;
-  font-size: 16px;
-}
-
-#testResult {
-  font-family: 'Poppins', sans-serif; 
-  position: absolute;
-  left: calc(100% + 10px);
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 25px;
-  font-weight: 700; /* Deixa o texto ainda mais grosso */
-  white-space: nowrap;
-
-  color: #e74c3c; /* vermelho vibrante para chamar atenção */
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.6); /* sombra para destacar */
-  background-color: rgba(255, 255, 255, 0.85); /* fundo claro semi-transparente */
-  padding: 6px 12px;
-  border-radius: 6px;
-  border: 2px solid #e74c3c; /* borda vermelha para enfatizar */
-  box-shadow: 0 4px 10px rgba(231, 76, 60, 0.4); /* sombra externa suave */
-  user-select: none; /* impede seleção acidental do texto */
-}
-
-
-/* BOTÕES COM ÍCONE */
-
+/* Padroniza os botões superiores */
 .btn {
   border: none;
   font-family: 'Lato', sans-serif;
@@ -386,9 +172,11 @@ button {
   max-width: 200px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);  
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: background-color 0.2s;   
 }
 
+/* Padroniza os ícones dos botões superiores */
 .btn-icon {
   font-family: 'FontAwesome';
   font-size: 20px;
@@ -400,6 +188,7 @@ button {
   border-radius: 8px 0 0 8px;
 }
 
+/* Configura o texto dos botões superiores */
 .btn .btn-text {
   display: flex;
   flex-direction: column;
@@ -409,16 +198,15 @@ button {
   line-height: 1.2;
 }
 
+/* Configura a quebra do texto dos botões superiores */
 .btn .btn-text span {
   display: block;
 }
 
-/* VARIAÇÕES DE COR */
-
+/* Cores dos botões superiores */
 .btn-1 {
   background: #3498db;
 }
-
 .btn-1:hover,
 .btn-1:active {
   background: #2980b9;
@@ -427,7 +215,6 @@ button {
 .btn-2 {
   background: #2ecc71;
 }
-
 .btn-2:hover,
 .btn-2:active {
   background: #27ae60;
@@ -436,7 +223,6 @@ button {
 .btn-3 {
   background: #34495e;
 }
-
 .btn-3:hover,
 .btn-3:active {
   background: #2c3e50;
@@ -445,7 +231,6 @@ button {
 .btn-4 {
   background: #ceb028;
 }
-
 .btn-4:hover,
 .btn-4:active {
   background: #957612;
@@ -454,30 +239,290 @@ button {
 .btn-5 {
   background: #e74c3c;
 }
-
 .btn-5:hover,
 .btn-5:active {
   background: #c0392b;
 }
 
-/* Ícones específicos */
-
+/* Importa os ícones específicos dos botões superiores */
 .icon-plus:before {
   content: "\f067";
 }
-
 .icon-times:before {
   content: "\f00d";
 }
-
 .icon-sign-in:before {
   content: "\f090";
 }
-
 .icon-dot-circle-o:before {
   content: "\f192";
 }
-
 .icon-random:before {
   content: "\f074";
+}
+
+/* Configura o container dos estados */
+#container {
+  width: 90%;
+  max-width: 800px;
+  height: 40vh;
+  margin: 15px auto;  
+  background-color: #fff;
+  border: 1px solid #ccc;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo do botão de reiniciar a página */
+  .clear-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15); 
+  }  
+  .clear-button a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #e74c3c;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;  
+  }
+  .clear-button a:hover {
+    background-color: #c0392b;
+  }
+  .clear-button i {
+    font-size: 14px; /* Tamanho do ícone de reiniciar a página */
+  }
+
+/* CONFIGURA A EXIBIÇÃO DOS ESTADOS*/  
+.state {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #555;
+  border-radius: 50%;
+  background-color: #ddd;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  z-index: 2;
+}
+
+/* bloqueia os estados de terem interações com o mouse senão os do .state  */
+.state > * {
+  pointer-events: none;
+}
+
+/* Configura o estilo do estado inicial */
+.state.initial .initial-arrow {
+  position: absolute;
+  left: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  width: 40px;
+  height: 12px;
+}
+.initial-arrow svg {
+  display: block;
+}
+
+/* Configura o círculo interno do estado final */
+.state.final .inner-circle {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border: 3px solid #000;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Configura a linha de conexão dos estados */
+.connection-line {
+  position: absolute;
+  pointer-events: none;
+  transform-origin: 0 0;
+  height: 2px;
+  background-color: #333;
+  z-index: 1;
+}
+
+/* Configura a seta na ponta da linha de conexão dos estados */
+.connection-line::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: -4px;
+  width: 0;
+  height: 0;
+  border-left: 6px solid #333;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+
+/* Configura a seta de loop de conexão dos estados */
+.transition-label,
+.self-loop-label {
+  color: black;
+  position: absolute;
+  background-color: white;
+  padding: 2px 5px;
+  font-size: 12px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  z-index: 3;
+}
+.loop-container {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  overflow: visible;
+}
+.self-loop-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: visible;
+}
+
+/* SEÇÃO DE TESTE */
+.test-section {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;    
+}
+
+/* Configura a div com a caixa de input e a mensagem do teste */
+.input-and-result {
+  position: relative; 
+  display: flex;
+  justify-content: center; 
+  margin-top: 20px;
+}
+
+/* Caixa de digitação da sequência */
+.test-section input {
+  font-family: 'Lato', sans-serif;
+  padding: 8px;
+  font-size: 14px;
+  width: 200px;
+  border: 1px solid #ccc; 
+  border-radius: 8px;
+  box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.1); 
+  outline: none; 
+  background-color: #fff;
+}
+#inputSequence {
+  width: 250px;
+  padding: 8px 12px;
+  font-size: 16px;
+}
+
+/* Caixa da mensagem do teste */
+#testResult {
+  display: none;
+  font-family: 'Poppins', sans-serif; 
+  position: absolute;
+  left: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 25px;
+  font-weight: 700; 
+  white-space: nowrap;
+  color: #e74c3c; 
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.6); 
+  background-color: rgba(255, 255, 255, 0.85); 
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 2px solid #e74c3c; 
+  box-shadow: 0 4px 10px rgba(231, 76, 60, 0.4); 
+  user-select: none; 
+}
+
+/* Configura o botão de teste */
+.test-button {
+  position: relative;
+  display: inline-block;
+  margin: 20px;
+}
+.test-button a {
+  color: white;
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 36px;
+  text-align: center;
+  text-decoration: none;
+  background-color: #f03030;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 20px 40px;
+  position: relative;
+  text-shadow: 0px 1px 0px #000;
+  -webkit-box-shadow: inset 0 1px 0 #ffd4d4, 0 10px 0 #a52727;
+  -moz-box-shadow: inset 0 1px 0 #ffd4d4, 0 10px 0 #a52727;
+  box-shadow: inset 0 1px 0 #ffd4d4, 0 10px 0 #a52727;
+  border-radius: 5px;
+}
+.test-button a:active {
+  top: 10px;
+  background-color: #c0392b;
+  box-shadow: inset 0 1px 0 #ffd4d4, inset 0 -3px 0 #a52727;
+}
+.test-button:after {
+  content: "";
+  height: 100%;
+  width: 100%;
+  padding: 4px;
+  position: absolute;
+  bottom: -15px;
+  left: -4px;
+  z-index: -1;
+  background-color: #2B1800;
+  border-radius: 5px;
+}
+.icon-rocket {
+  height: 32px;
+  width: 32px;
+}
+
+/* Configura o rodapé da página para exibir o link do repositório do GitHub */
+.footer {
+  color: #2980b9;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1em;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 1px;
+  margin: 20px auto 10px;
+  padding: 12px 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  border-radius: 8px;
+  max-width: 250px;
+  display: block;
+}
+.footer a {
+  color: #2980b9;
+  text-decoration: none;
+}
+.footer a:hover {
+  color: #1f5f8b;
+}
+.footer i {
+  margin-right: 5px;
 }

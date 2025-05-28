@@ -1,6 +1,35 @@
+// Seleciona os elementos da função de instruções
+const helpLink = document.getElementById('helpLink');
+const instructionOverlay = document.getElementById('instructionOverlay');
+const closeBtn = document.getElementById('closeInstructionBtn');
+
+// Abre a caixa de intruções
+helpLink.addEventListener('click', e => {
+  e.preventDefault();
+  instructionOverlay.style.display = 'block';
+});
+
+// Fecha a caixa de intruções
+closeBtn.addEventListener('click', () => {
+  instructionOverlay.style.display = 'none';
+});
+
+// Seleciona os botões da interface
+const btnAdd = document.getElementById('addStateBtn');
+const btnRemove = document.getElementById('removeStateBtn');
+const btnInitial = document.getElementById('markInitialBtn');
+const btnFinal = document.getElementById('markFinalBtn');
+const btnConfigureTransition = document.getElementById('configureTransitionBtn');
+
+// Associa funções aos cliques dos botões
+btnAdd.onclick = addState;
+btnRemove.onclick = removeState;
+btnInitial.onclick = toggleInitial;
+btnFinal.onclick = toggleFinal;
+btnConfigureTransition.onclick = configureTransition;
+
 // Seleciona o container onde os estados serão adicionados
 const container = document.getElementById('container');
-
 // Contador de estados criados
 let stateCount = 0;
 // Tamanho do estado e espaçamentos entre eles
@@ -13,33 +42,6 @@ let selectedState = null;
 let initialState = null;
 // Objeto que armazena todas as transições do AFD
 const transitions = {};
-
-// Seleciona os botões da interface
-const btnAdd = document.getElementById('addStateBtn');
-const btnRemove = document.getElementById('removeStateBtn');
-const btnInitial = document.getElementById('markInitialBtn');
-const btnFinal = document.getElementById('markFinalBtn');
-const btnConfigureTransition = document.getElementById('configureTransitionBtn');
-
-const helpLink = document.getElementById('helpLink');
-const instructionOverlay = document.getElementById('instructionOverlay');
-const closeBtn = document.getElementById('closeInstructionBtn');
-
-helpLink.addEventListener('click', e => {
-  e.preventDefault();
-  instructionOverlay.style.display = 'block';
-});
-
-closeBtn.addEventListener('click', () => {
-  instructionOverlay.style.display = 'none';
-});
-
-// Associa funções aos cliques dos botões
-btnAdd.onclick = addState;
-btnRemove.onclick = removeState;
-btnInitial.onclick = toggleInitial;
-btnFinal.onclick = toggleFinal;
-btnConfigureTransition.onclick = configureTransition;
 
 // Função responsável por adicionar um novo estado ao autômato
 function addState() {
@@ -626,6 +628,12 @@ function updateConnections(stateEl) {
     });
 }
 
+// Configura o botão de limpar a tela
+document.getElementById('clearBtn').addEventListener('click', (e) => {
+  e.preventDefault();
+  location.reload();
+});
+
 // Seleciona o botão de teste e adiciona um ouvinte de evento de clique
 document.getElementById("testBtn").addEventListener("click", function (e) {
   e.preventDefault();
@@ -641,6 +649,7 @@ async function testSequence() {
     
     // Limpa a mensagem de resultado anterior
     resultEl.textContent = '';
+    resultEl.style.display = 'block'; // <-- Faz aparecer
 
     const sequence = document.getElementById('inputSequence').value.trim();
   
